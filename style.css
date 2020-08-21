@@ -5,6 +5,46 @@
     font-style: normal;
 }
 
+@keyframes beforeAnimate{
+    0%{
+        transform: translate(0rem, 0rem);
+    }
+    25%{
+        transform: translate(0rem, 4.2rem);
+    }
+    50%{
+        transform: translate(15rem, 4.2rem);
+    }
+    75%{
+        transform: translate(15rem, 0rem);
+    }
+    100%{
+        transform: translate(0rem, 0rem);
+    }
+}
+
+@keyframes afterAnimate{
+    0%{
+        transform: translate(0rem, 0rem);
+    }
+    25%{
+        transform: translate(0rem, -4rem);
+    }
+    50%{
+        transform: translate(-15rem, -4rem);
+    }
+    75%{
+        transform: translate(-15rem, 0rem);
+    }
+    100%{
+        transform: translate(0rem, 0rem);
+    }
+}
+
+*{
+    box-sizing: border-box;
+}
+
 .container{
     display: flex;
     align-items: center;
@@ -18,11 +58,60 @@
     border: none;
     letter-spacing: 0.15em;
     font-size: 28px;
-    background: green;
+    background: transparent;
     outline: none;
     padding: 1em 2.5em;
     color: black;
     font-weight: 700;
     font-family: 'Lato-Regular';
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s;
+}
+
+.btn::before,
+.btn::after{
+    position: absolute;
+    width: 10%;
+    height: 40%;
+    border: 0px;
+    border-radius: 50%;
+    z-index: -2;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    content: "";
+}
+
+.btn::before{
+    left:  1.5rem;
+    top: -0.75rem;
+    background-color: rgb(179, 51, 51);
+    animation: beforeAnimate 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
+}
+
+.btn::after{
+    left: 16rem;
+    top: 4rem;
+    background-color: rgb(184, 96, 56);
+    animation: afterAnimate 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s infinite alternate;
+    z-index: -3;
+}
+
+.btn:hover{
+    color: white;
+}
+
+.btn:hover::before,
+.btn:hover::after{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    border-radius: 0;
+    animation: none;
+}
+
+.btn:hover::before{
+    left: 0px;
+}
+
+.btn:hover::after{
+    top: 0.5rem;
+    left: 0.35rem;
 }
